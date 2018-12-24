@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 class TaskController extends Controller
 {
   public function index(){
-    return "Hello World";
+    $folders = Folder::all();
+
+    return view('task/index',[
+      'folders' => $folders,
+    ]);
   }
 }
