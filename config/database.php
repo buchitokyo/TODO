@@ -32,6 +32,12 @@ return [
     */
 
     'connections' => [
+        // 追加
+        'sqlite_testing' => [
+          'driver' => 'sqlite',
+          'database' => ':memory:',
+          'prefix' => '',
+        ],
 
         'sqlite' => [
             'driver' => 'sqlite',
