@@ -1,26 +1,6 @@
-<!DOCTYPE html>
+@extends('shared/layout')
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ToDo APP</title>
-
-    <!-- Bootstrap -->
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"> -->
-    <link rel="stylesheet" href="/css/styles.css">
-
-  </head>
-  <body>
-    <header>
-      <nav class="my-navbar">
-        <a class="my=navbar-brand" href="/">ToDo App</a>
-      </nav>
-    </header>
-
-    <main>
+@section('content')
       <div class="container">
         <div class="row">
           <div class="col col-md-4">
@@ -39,7 +19,7 @@
                   <a href="{{ route('tasks.index',['id' => $folder->id]) }}"
                     class="list-group-item {{ $current_folder_id === $folder->id ? 'active' : '' }} ">
                     {{ $folder-> title }}
-                </a>
+                  </a>
                 @endforeach
               </div>
             </nav>
@@ -51,7 +31,8 @@
               <div class="panel-heading">タスク</div>
                 <div class="panel-body">
                   <div class="text-right">
-                    <a href="#" class="btn btn-default btn-block">
+                    <!-- TaskControllerでつけた変数名を参照   難しい $current_folder_idでもいけるみたい -->
+                    <a href="{{ route('tasks.create', ['id' => $folder->id ]) }}" class="btn btn-default btn-block">
                     タスクを追加する
                   </a>
                   </div>
@@ -63,6 +44,7 @@
                   <th>状態</th>
                   <th>期限</th>
                   <th></th>
+                  <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -72,7 +54,8 @@
                     <!-- status_labelはアクセサメゾットをTask modelで定義 -->
                     <td><span class="label {{ $task -> status_class }}">{{ $task->status_label }}</span></td>
                     <td>{{ $task -> formatted_due_date }}</td>
-                    <td><a href="#">編集</td>
+                    <td><a href="{{ route('tasks.edit', ['id' => $task->folder_id, 'task_id' => $task->id]) }}">編集</td>
+                    <td><a href="/">削除</td>
                   </tr>
                   @endforeach
                 </tbody>
@@ -81,7 +64,4 @@
           </div>
         </div>
       </div>
-    </main>
-
-  </body>
-</html>
+@endsection
