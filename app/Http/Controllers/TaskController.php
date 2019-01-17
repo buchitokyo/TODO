@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Folder;  //追加
 use Illuminate\Http\Request;
+use App\Http\Requests\EditTask; //追加
+use App\Http\Requests\CreateTask; //追加
 use App\Task;  //Tasksではエラーだったので追加
 
 class TaskController extends Controller
@@ -20,14 +22,76 @@ class TaskController extends Controller
       // $tasks = Tasks::where('folder_id', $current_folder->id)->get(); だとエラー
       //$tasks = Task::where('folder_id', $current_folder->id)->get();
       //    ↓
-      // Folder ModelでhasManyを定義したためtask()が使える -> はrailsの . と一緒
+      // Folder ModelでhasManyを定義したためtasks()が使える -> はrailsの . と一緒
       $tasks = $current_folder->tasks()->get();
 
 
-      return view('tasks/index', [
+     //第一引数がテンプレートファイル名で第二引数がテンプレートに渡すデータ
+     //あくまでテンプレート側ではキー名が変数名（任意）で参照できる   プロパティのように参照
+      return view('tasks.index', [
           'folders' => $folders,
-          'current_folder_id' => $current_folder->id,
+          'current_folder_id' => $current_folder->id,  // 'current_folder_id' == 'id'
           'tasks' => $tasks,
       ]);
+  }
+
+  /**
+   * GET /folders/{id}/tasks/create
+  */
+
+  public function showCreateForm (int $id){
+    return view ('tasks.create',[   //'tasks/create' OK
+      'folder_id' => $id,
+    ]);
+  }
+
+
+  public function create(int $id, CreateTask $request){
+    $current_folder = Folder::find($id);
+
+    // タスクモデルのインスタンスを作成する
+    $task = new Task();
+
+    //タイトルに入力値を代入する p.66
+    $task->title = $request->title;
+    $task->due_date = $request->due_date;
+
+    // インスタンスの状態をデータベースに書き込む
+    $current_folder->tasks()->save($task);
+
+    return redirect()->route('tasks.index',[
+      'id' => $current_folder -> id,
+    ]);
+
+  }
+
+  /**
+   * GET /folders/{id}/tasks/{task_id}/edit
+   */
+  public function showEditForm(int $id,$task_id){
+    $task = Task::find($task_id);
+
+    return view('tasks.edit',[
+      'task' => $task,
+    ]);
+
+  }
+
+
+  //まずリクエストされた ID でタスクデータを取得。これが編集対象
+  public function edit ( int $int, int $task_id, EditTask $request) {
+    //1 リクエストされた ID でタスクデータを取得
+    $task = Task::find($task_id);
+
+    //2 編集対象のタスクデータに入力値を詰めて save
+    $task->title = $request ->title;
+    $task->status = $request ->status;
+    $task->due_date = $request->due_date;
+    $task->save();
+
+    //3 編集対象のタスクが属するタスク一覧画面へリダイレクト
+    return redirect()->route('tasks.index',[
+      'id' => $task -> folder_id,
+    ]);
   }
 }

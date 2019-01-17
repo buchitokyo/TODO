@@ -1,20 +1,6 @@
-<!DOCTYPE html>
-<html lang="jp">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ToDo App</title>
+@extends('shared/layout')
 
-    <link rel="stylesheet" href="/css/styles.css">
-  </head>
-  <body>
-    <header>
-      <nav class="my-navbar">
-        <a class="my-navbar-band" href="/">ToDo App</a>
-      </nav>
-    </header>
-  </body>
+@section('content')
   <div class="container">
     <div class="row">
       <div class="col-md-offset-3 col-md-6">
@@ -50,4 +36,4 @@
       </div>
     </div>
   </div>
-</html>
+@endsection
