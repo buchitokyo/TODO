@@ -13,7 +13,6 @@ return [
     |
     */
 
-    //'password' => 'Passwords must be at least six characters and match the confirmation.',
     'reset' => 'パスワードを再設定しました。',
     'sent' => 'パスワード再設定リンクを送信しました。',
     'token' => 'トークンが無効です。',

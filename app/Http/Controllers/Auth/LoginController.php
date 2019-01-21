@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
+//use App\Folder;  //追加
 // 忘れずにインポートすること!!
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -21,26 +22,26 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
-    // /**
-    //  * Where to redirect users after login.
-    //  *
-    //  * @var string
-    //  */
-    // protected $redirectTo = '/';
+    /**
+     * Where to redirect users after login.
+     *
+     * @var string
+    */
+     //protected $redirectTo = '/';
+      // protected function redirectTo (){
+      //   return redirect()->route('/')->with('my_status', __('ログインしました。'));
+      // }
 
     /**
      * ログイン後の処理
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  mixed  $folder
      * @return \Illuminate\Http\Response
      */
-    protected function authenticated(Request $request, $folder)
+    protected function authenticated(Request $request)
     {
-        // ログインしたら、ユーザー自身のプロフィールページへ移動
-        return redirect()->route('tasks.index', [
-            'id' => $folder->id,
-        ])->with('my_status', __('ログインしました。'));
+        // ログインしたら、フォルダがないならばページへ移動
+        return redirect()->route('home')->with('my_status', __('ログインしました。'));
     }
 
     /**
@@ -51,5 +52,20 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    /**
+     * ユーザーをログアウトさせる
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+        //$request->session()->invalidate();
+
+        // ログアウトしたら、トップページへ移動
+        return $this->loggedOut($request) ?: redirect('login')->with('my_status', __('ログアウトしました。'));
     }
 }

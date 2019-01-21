@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+// 忘れずにインポートすること!!
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -23,12 +25,29 @@ class RegisterController extends Controller
 
     use RegistersUsers;
 
+    // /**
+    //  * Where to redirect users after registration.
+    //  *
+    //  * @var string
+    //  */
+    //protected $redirectTo = '/';
+
+//@param  mixed  $user
     /**
-     * Where to redirect users after registration.
-     *
-     * @var string
+       * ユーザー登録後の処理
+       *
+       * @param  \Illuminate\Http\Request  $request
+       * @param  mixed  $user
+       * @return \Illuminate\Http\Response
      */
-    protected $redirectTo = '/';
+
+     protected function registered(Request $request)
+    {
+        // 登録したら、そのユーザーのプロフィール・ページへ移動
+        return redirect('/')->with('my_status',
+            __('ユーザー登録が完了致しました。')
+        );
+    }
 
     /**
      * Create a new controller instance.
