@@ -7,13 +7,19 @@ use Illuminate\Http\Request;
 use App\Http\Requests\EditTask; //追加
 use App\Http\Requests\CreateTask; //追加
 use App\Task;  //Tasksではエラーだったので追加
+use Illuminate\Support\Facades\Auth;  //追加
+
 
 class TaskController extends Controller
 {
   // パラメーターの利用
   public function index(int $id){
-    // すべてのフォルダを取得する
-      $folders = Folder::all();
+
+      // すべてのフォルダを取得する
+      //$folders = Folder::all();
+
+      // ユーザーのフォルダを取得する
+      $folders = Auth::user()->folders()->get();
 
       // 選ばれたフォルダを取得する
       $current_folder = Folder::find($id);
@@ -61,7 +67,7 @@ class TaskController extends Controller
 
     return redirect()->route('tasks.index',[
       'id' => $current_folder -> id,
-    ]);
+    ])->with('my_status', __('タスクが作成されました。'));
 
   }
 
@@ -92,6 +98,6 @@ class TaskController extends Controller
     //3 編集対象のタスクが属するタスク一覧画面へリダイレクト
     return redirect()->route('tasks.index',[
       'id' => $task -> folder_id,
-    ]);
+    ])->with('my_status', __('タスクが編集されました。'));
   }
 }

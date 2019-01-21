@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+//use App\Folder;  //追加
+// 忘れずにインポートすること!!
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -24,8 +26,23 @@ class LoginController extends Controller
      * Where to redirect users after login.
      *
      * @var string
+    */
+     //protected $redirectTo = '/';
+      // protected function redirectTo (){
+      //   return redirect()->route('/')->with('my_status', __('ログインしました。'));
+      // }
+
+    /**
+     * ログイン後の処理
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
-    protected $redirectTo = '/home';
+    protected function authenticated(Request $request)
+    {
+        // ログインしたら、フォルダがないならばページへ移動
+        return redirect()->route('home')->with('my_status', __('ログインしました。'));
+    }
 
     /**
      * Create a new controller instance.
@@ -35,5 +52,20 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    /**
+     * ユーザーをログアウトさせる
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+        //$request->session()->invalidate();
+
+        // ログアウトしたら、トップページへ移動
+        return $this->loggedOut($request) ?: redirect('login')->with('my_status', __('ログアウトしました。'));
     }
 }
