@@ -7,6 +7,7 @@ use App\Http\Requests\CreateFolder; //追加
 use Illuminate\Http\Request;
 // Authクラスをインポートする
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class FolderController extends Controller
 {
@@ -30,5 +31,19 @@ class FolderController extends Controller
     return redirect()->route('tasks.index',[
       'id'=>$folder->id,
     ])->with('my_status', __('フォルダが作成されました。'));
+  }
+
+  /**
+    * フォルダ削除
+    * @param Folder $folder
+    * @return \Illuminate\Http\RedirectResponse
+  */
+
+  public function destroy ( $id ){
+    $folder = Folder::find($id);
+
+    // Delete The Task...
+      $folder->delete();
+    return redirect()-> route('home')->with('my_status',__('フォルダを削除しました。'));
   }
 }

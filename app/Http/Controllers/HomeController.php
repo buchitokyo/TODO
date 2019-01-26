@@ -10,6 +10,9 @@ class HomeController extends Controller
 {
   public function index()
     {
+
+      //Homeにもログイン時と同じ記入
+
         // ログインユーザーを取得する
         $user = Auth::user();
 
@@ -20,10 +23,9 @@ class HomeController extends Controller
         if (is_null($folder)) {
             return view('home');
         }
-
         // フォルダがあればそのフォルダのタスク一覧にリダイレクトする
         return redirect()->route('tasks.index', [
             'id' => $folder->id,
-        ])->with('my_status', __('ログインしました。'));
+        ]);
     }
 }
