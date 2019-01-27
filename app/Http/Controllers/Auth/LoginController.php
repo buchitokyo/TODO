@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-//use App\Folder;  //追加
+use App\Folder;  //追加
+use App\Task;  //追加
 // 忘れずにインポートすること!!
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;  //追加
 
 class LoginController extends Controller
 {
@@ -37,11 +39,24 @@ class LoginController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
+     * @param Folder $folder
      */
-    protected function authenticated(Request $request)
+    protected function authenticated(Request $request,$folder)
     {
+      // ログインユーザーを取得する
+      $user = Auth::user();
+
+      // ログインユーザーに紐づくフォルダを一つ取得する
+      $folder = $user->folders()->first();
+
+      if (is_null($folder)) {
         // ログインしたら、フォルダがないならばページへ移動
-        return redirect()->route('home')->with('my_status', __('ログインしました。'));
+      return redirect('/')->with('my_status', __('ログインしました。'));
+      }
+      //フォルダがあればそのフォルダのタスク一覧にリダイレクトする
+      return redirect()->route('tasks.index', [
+          'id' => $folder->id,
+      ])->with('my_status', __('ログインしました。'));     //メッセージを出すために
     }
 
     /**

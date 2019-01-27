@@ -11,9 +11,9 @@ body {
 
 .my-navbar {
   align-items: center;
-  background: #333;
+  background: #fff;
   display: flex;
-  height: 6rem;
+  height: 7rem;
   justify-content: space-between;
   padding: 0 2%;
   margin-bottom: 3rem;
@@ -25,12 +25,12 @@ body {
 
 .my-navbar-brand,
 .my-navbar-item {
-  color: #8c8c8c;
+  color: #333;
 }
 
 .my-navbar-brand:hover,
 a.my-navbar-item:hover {
-  color: #ffffff;
+  color: #8c8c8c;
 }
 
 .table td:nth-child(2),
@@ -45,3 +45,11 @@ a.my-navbar-item:hover {
 .form-control[readonly] {
   background-color: #fff;
 }
+
+	p a {
+		display: block;
+		width: 70px;
+		height: 75px;
+		font-size: 0;
+		background: url(../image/ToDo-logo.png) left top/85px auto no-repeat;
+	}

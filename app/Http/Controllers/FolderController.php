@@ -7,6 +7,7 @@ use App\Http\Requests\CreateFolder; //追加
 use Illuminate\Http\Request;
 // Authクラスをインポートする
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
 
 class FolderController extends Controller
 {
@@ -30,5 +31,45 @@ class FolderController extends Controller
     return redirect()->route('tasks.index',[
       'id'=>$folder->id,
     ])->with('my_status', __('フォルダが作成されました。'));
+  }
+
+  /**
+    * フォルダ削除
+    * @param Folder $folder
+    * @return \Illuminate\Http\RedirectResponse
+  */
+
+  public function destroy ( int $id ){
+    // $folder = Folder::find($id);
+    //
+    // // Delete...
+    // $folder->delete();
+    //
+    // return redirect()->route('home')->with('my_status',__('フォルダを削除しました。'));
+
+    // if (is_null($folder['id'])){
+    //   return redirect()->route('home')->with('my_status',__('フォルダを削除しました。'));
+    // }
+
+    //ログインユーザーを取得する
+    $user = Auth::user();
+
+    //ログインユーザーに紐づくフォルダを取得する
+    $folder = $user->folders()->find($id);
+
+    // // Delete The Task...
+    $folder->delete();
+
+    // ログインユーザーに紐づくフォルダを一つ取得する
+    $folder = $user->folders()->first();
+
+    if (is_null($folder['id'])){
+      return redirect()->route('home')->with('my_status',__('フォルダを削除しました。'));
+    }
+    //フォルダがあればそのフォルダのタスク一覧にリダイレクトする
+    return redirect()->route('tasks.index', [
+        'id' => $folder['id'],
+    ])->with('my_status', __('フォルダを削除しましたよ！'));     //メッセージを出すために
+
   }
 }
