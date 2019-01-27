@@ -37,7 +37,7 @@ class TaskController extends Controller
      //あくまでテンプレート側ではキー名が変数名（任意）で参照できる   プロパティのように参照
       return view('tasks.index', [
           'folders' => $folders,
-          'current_folder_id' => $current_folder->id,  // 'current_folder_id' == 'id'
+          'current_folder_id' => $current_folder->id,  //  'id' => $current_folder_id  //view側
           'tasks' => $tasks,
       ]);
   }
@@ -55,7 +55,6 @@ class TaskController extends Controller
 
     public function create(int $id, CreateTask $request){
       $current_folder = Folder::find($id);
-
       // タスクモデルのインスタンスを作成する
       $task = new Task();
 
@@ -67,7 +66,7 @@ class TaskController extends Controller
       $current_folder->tasks()->save($task);
 
       return redirect()->route('tasks.index',[
-        'id' => $current_folder -> id,
+        'id' => $current_folder->id,
       ])->with('my_status', __('タスクが作成されました。'));
 
     }

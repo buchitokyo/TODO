@@ -39,6 +39,7 @@ class LoginController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
+     * @param Folder $folder
      */
     protected function authenticated(Request $request,$folder)
     {

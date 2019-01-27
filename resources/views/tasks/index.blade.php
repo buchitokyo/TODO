@@ -33,7 +33,7 @@
               <form action="{{ route('folders.delete',['id' => $folder -> id]) }}" method="POST">
                   {{ csrf_field() }}
                   {{ method_field('DELETE') }}
-                  <button type="submit" class="btn btn-default btn-block glyphicon glyphicon-trash" id="delete">削除</button>
+                  <button type="submit" class="btn btn-default btn-block glyphicon glyphicon-trash" id="delete">フォルダ削除</button>
               </form>
             </div>
           </div>
@@ -44,7 +44,7 @@
                 <div class="panel-body">
                   <div class="text-right">
                     <!-- TaskControllerでつけた変数名を参照   難しい $current_folder_idでもいけるみたい -->
-                    <a href="{{ route('tasks.create', ['id' => $folder->id ]) }}" class="btn btn-default btn-block glyphicon glyphicon-plus">
+                    <a href="{{ route('tasks.create', ['id' => $current_folder_id ]) }}" class="btn btn-default btn-block glyphicon glyphicon-plus">
                     <i class="fa fa-plus"></i>タスクを追加する
                   </a>
                   </div>
