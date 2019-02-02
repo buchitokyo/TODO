@@ -33,7 +33,7 @@
               <form action="{{ route('folders.delete',['id' => $folder -> id]) }}" method="POST">
                   {{ csrf_field() }}
                   {{ method_field('DELETE') }}
-                  <button type="submit" class="btn btn-default btn-block glyphicon glyphicon-trash" id="delete">フォルダ削除</button>
+                  <button type="submit" class="btn btn-default btn-block glyphicon glyphicon-trash" id="delete">  フォルダ削除</button>
               </form>
             </div>
           </div>

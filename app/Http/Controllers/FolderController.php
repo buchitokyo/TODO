@@ -57,10 +57,10 @@ class FolderController extends Controller
     //ログインユーザーに紐づくフォルダを取得する
     $folder = $user->folders()->find($id);
 
-    // // Delete The Task...
+    // // Delete folder...
     $folder->delete();
 
-    // ログインユーザーに紐づくフォルダを一つ取得する
+    // ログインユーザーに紐づくフォルダを最初の一つ取得する
     $folder = $user->folders()->first();
 
     if (is_null($folder['id'])){
@@ -68,7 +68,7 @@ class FolderController extends Controller
     }
     //フォルダがあればそのフォルダのタスク一覧にリダイレクトする
     return redirect()->route('tasks.index', [
-        'id' => $folder['id'],
+        'id' => $folder['id'],    //連想配列にしてidを取得
     ])->with('my_status', __('フォルダを削除しましたよ！'));     //メッセージを出すために
 
   }
