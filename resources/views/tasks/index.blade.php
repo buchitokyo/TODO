@@ -44,7 +44,7 @@
                 <div class="panel-body">
                   <div class="text-right">
                     <!-- TaskControllerでつけた変数名を参照   難しい $current_folder_idでもいけるみたい -->
-                    <a href="{{ route('tasks.create', ['id' => $current_folder_id ]) }}" class="btn btn-default btn-block glyphicon glyphicon-plus">
+                    <a href="{{ route('tasks.create', ['id' => $current_folder_id]) }}" class="btn btn-default btn-block glyphicon glyphicon-plus">
                     <i class="fa fa-plus"></i>タスクを追加する
                   </a>
                   </div>
@@ -53,22 +53,24 @@
                 <thead>
                 <tr>
                   <th>タイトル</th>
+                  <th width="230" height="47">内容</th>
                   <th>状態</th>
                   <th>期限</th>
-                  <th></th>
-                  <th></th>
+                  <th width="74" height="47"></th>
+                  <th width="74" height="47"></th>
                 </tr>
                 </thead>
                 <tbody>
                   @foreach ($tasks as $task)
                   <tr>
-                    <td>{{ $task->title }}</td>
+                    <td><a href="{{ route('tasks.list', ['id' => $task->folder_id, 'task_id' => $task->id]) }}">{{ $task->title }}</a></td>
+                    <td>{{ mb_substr($task->content,0,15)."..." }}</td>
                     <!-- status_labelはアクセサメゾットをTask modelで定義 -->
                     <td><span class="label {{ $task -> status_class }}">{{ $task->status_label }}</span></td>
                     <td>{{ $task -> formatted_due_date }}</td>
-                    <td><a href="{{ route('tasks.edit', ['id' => $task->folder_id, 'task_id' => $task->id]) }}"
+                    <td class="edit"><a href="{{ route('tasks.edit', ['id' => $task->folder_id, 'task_id' => $task->id]) }}"
                       class="btn btn-success btn-sm glyphicon glyphicon-pencil">編集</td>
-                    <td><form action="{{ route('tasks.delete', ['id' => $task->folder_id, 'task_id' => $task->id]) }}" method="POST">
+                    <td class="delete"><form action="{{ route('tasks.delete', ['id' => $task->folder_id, 'task_id' => $task->id]) }}" method="POST">
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
                         <button type="submit" class="btn btn-danger btn-sm glyphicon glyphicon-trash" id="delete">削除</button>
@@ -77,6 +79,11 @@
                   @endforeach
                 </tbody>
               </table>
+
+              <div style="text-align: center">
+                {{ $tasks->links() }}
+              </div>
+              
             </div>
           </div>
         </div>

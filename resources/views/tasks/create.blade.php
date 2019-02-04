@@ -36,11 +36,17 @@
                 </div>
 
                 <div class="form-group">
+                  <label for="content">コンテント</label>
+                  <input type="text" class="form-control" name="content" id="content" placeholder="内容を入力して下さい。" value="{{ old('content') }}">
+                </div>
+
+                <div class="form-group">
                   <label for="due_date">期限</label>
                   <input type="text" class="form-control" name="due_date" id="due_date" placeholder="期限を入力して下さい。" value="{{ old('due_date') }}">
                 </div>
 
                 <div class="text-right">
+                  <input value="戻る" onclick="history.back();" type="button" class="btn btn-default">
                   <button type="submit" class="btn btn-primary">送信</button>
                 </div>
 

@@ -22,6 +22,8 @@ Route::group(['middleware' => 'auth'], function() {
 
       //Task削除
       Route::delete('/folders/{folder}/tasks/{task}', 'TaskController@destroy')->name('tasks.delete');
+
+      Route::get('/folders/{folder}/tasks/{task}', 'TaskController@list')->name('tasks.list');
     });
 });
 
