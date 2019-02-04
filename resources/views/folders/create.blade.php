@@ -27,6 +27,7 @@
                 <input type="text" class="form-control" name="title" id="title" value="{{ old('title') }}" placeholder="フォルダ名を入力する">
               </div>
               <div class="text-right">
+                <input value="戻る" onclick="history.back();" type="button" class="btn btn-default">
                 <button type="submit" class="btn btn-primary">送信</button>
               </div>
             </form>

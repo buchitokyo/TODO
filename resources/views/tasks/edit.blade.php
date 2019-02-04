@@ -31,6 +31,12 @@
               </div>
 
               <div class="form-group">
+                <label for="title">内容</label>
+                <input type="text" class="form-control" name="content" id="content"
+                      value="{{ old('content', $task->content) }}" />
+              </div>
+
+              <div class="form-group">
                 <label for="status">状態</label>
               <!-- 直前の入力値またはデータベースに登録済みの値を比べて、一致する場合に
                    option タグの中に 'selected' を出力 -->
@@ -56,8 +62,8 @@
 
               <div class="text-right">
                 <button type="submit" class="btn btn-primary">送信</button>
+                <input value="戻る" onclick="history.back();" type="button" class="btn btn-default">
               </div>
-
             </form>
           </div>
         </nav>

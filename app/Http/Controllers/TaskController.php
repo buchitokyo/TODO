@@ -49,11 +49,13 @@ class TaskController extends Controller
      // 選ばれたフォルダに紐づくタスクを取得する
       $tasks = $folder->tasks()->get();
 
+      $tasks = Task::paginate(5)->onEachSide(5);;
+
       return view('tasks/index', [
           'folders' => $folders,
           'current_folder_id' => $folder->id,
           'tasks' => $tasks,
-      ]);
+      ]);     //compact('tasks') pagenation
     }
 
     /**
@@ -64,9 +66,9 @@ class TaskController extends Controller
 
     public function showCreateForm (Folder $folder)
     {
-      return view ('tasks.create',[   //'tasks/create' OK
-        'folder_id' => $folder->id,
-      ]);
+      return view('tasks/create', [
+            'folder_id' => $folder->id,
+        ]);
     }
 
     /**
@@ -83,6 +85,7 @@ class TaskController extends Controller
 
       //タイトルに入力値を代入する p.66
       $task->title = $request->title;
+      $task->content = $request->content;
       $task->due_date = $request->due_date;
 
       // インスタンスの状態をデータベースに書き込む
@@ -105,7 +108,7 @@ class TaskController extends Controller
 
       //$task = Task::find($task);
 
-      return view('tasks.edit',[
+      return view('tasks/edit',[
         'task' => $task,
       ]);
 
@@ -127,6 +130,7 @@ class TaskController extends Controller
       $this->checkRelation($folder, $task);
       //2 編集対象のタスクデータに入力値を詰めて save
       $task->title = $request ->title;
+      $task->content = $request ->content;
       $task->status = $request ->status;
       $task->due_date = $request->due_date;
       $task->save();
@@ -164,6 +168,25 @@ class TaskController extends Controller
         if ($folder->id !== $task->folder_id) {
             abort(404);
         }
+    }
+
+
+    /**
+      * タスク
+      * @param Folder $folder
+      * @param Task $task
+      * @param EditTask $request
+      * @return \Illuminate\Http\RedirectResponse
+    */
+    //まずリクエストされた ID でタスクデータを取得。これが編集対象
+    public function list ( Folder $folder,Task $task) {
+      //$task = Task::find($task);
+
+      $this->checkRelation($folder, $task);
+
+       return view('tasks.list', [
+          'task' => $task,
+       ]);
     }
 
 }

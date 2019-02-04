@@ -36,9 +36,14 @@ a.my-navbar-item:hover {
 .table td:nth-child(2),
 .table td:nth-child(3),
 .table td:nth-child(4),
-.table td:nth-child(5) {
+.table td:nth-child(5),
+.table td:nth-child(6)
+ {
   white-space: nowrap;
   width: 1px;
+}
+.table tr	{
+	border:1px solid #dedede;
 }
 
 .form-control[disabled],
