@@ -44,12 +44,11 @@ class TaskController extends Controller
      //  ]);
 
      // ユーザーのフォルダを取得する
-      $folders = Auth::user()->folders()->get();
+      $folders = Auth::user()->folders()->orderBy('created_at', 'desc')->get();
 
      // 選ばれたフォルダに紐づくタスクを取得する
-      $tasks = $folder->tasks()->get();
-
-      $tasks = Task::paginate(5)->onEachSide(5);;
+     //$tasks = Task::paginate(5)->onEachSide(5);
+      $tasks = $folder->tasks()->orderBy('created_at', 'desc')->paginate(5);  //get()を削除した
 
       return view('tasks/index', [
           'folders' => $folders,

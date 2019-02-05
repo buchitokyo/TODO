@@ -81,9 +81,9 @@
               </table>
 
               <div style="text-align: center">
-                {{ $tasks->links() }}
+                {{ $tasks->onEachSide(5)->links() }}
               </div>
-              
+
             </div>
           </div>
         </div>
