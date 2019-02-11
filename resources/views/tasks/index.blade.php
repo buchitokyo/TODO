@@ -50,6 +50,7 @@
                   </div>
                 </div>
               <table class="table">
+                このページのタスク{{ count($tasks) }}件の内、{{ count($tasks->where('status',3 )) }}件完了
                 <thead>
                 <tr>
                   <th>タイトル</th>

@@ -44,11 +44,11 @@ class TaskController extends Controller
      //  ]);
 
      // ユーザーのフォルダを取得する
-      $folders = Auth::user()->folders()->orderBy('created_at', 'desc')->get();
+      $folders = Auth::user()->folders()->orderBy('created_at', 'asc')->get();
 
      // 選ばれたフォルダに紐づくタスクを取得する
      //$tasks = Task::paginate(5)->onEachSide(5);
-      $tasks = $folder->tasks()->orderBy('created_at', 'desc')->paginate(5);  //get()を削除した
+      $tasks = $folder->tasks()->orderBy('created_at', 'desc')->paginate(8);  //get()を削除した
 
       return view('tasks/index', [
           'folders' => $folders,
@@ -56,6 +56,12 @@ class TaskController extends Controller
           'tasks' => $tasks,
       ]);     //compact('tasks') pagenation
     }
+
+  //   public static function getMyCount() {
+	// 	// ここに何かの処理
+	// 	//count($tasks->where('status',2 )
+  //   //\App\Http\Controllers\MyController::getMyCount()
+	// }
 
     /**
      * タスク作成フォーム
