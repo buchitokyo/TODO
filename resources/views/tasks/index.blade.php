@@ -13,12 +13,6 @@
                 <a href="{{ route('folders.create')}}" class="btn btn-default btn-block glyphicon glyphicon-plus">
                   フォルダを追加する
                 </a>
-                <!-- <a href="#"
-                  class="btn btn-success btn-block" style="margin-top:10px;">編集</a> -->
-                <!-- <form action="/" method="POST">
-                      {{ csrf_field() }}
-                      {{ method_field('DELETE') }}
-                <button type="button" class="btn btn-secondary" id ="delete" style="margin-top: 10px;">削除</button> -->
               </div>
               <div class="list-group">
                 @foreach($folders as $folder)
@@ -50,7 +44,9 @@
                   </div>
                 </div>
               <table class="table">
-                このページのタスク{{ count($tasks) }}件の内、{{ count($tasks->where('status',3 )) }}件完了
+
+                  このページのタスク{{ count($tasks) }}件の内、{{ count($tasks->where('status',3 )) }}件完了
+
                 <thead>
                 <tr>
                   <th>タイトル</th>
@@ -82,7 +78,7 @@
               </table>
 
               <div style="text-align: center">
-                {{ $tasks->onEachSide(5)->links() }}
+                {!! $tasks->appends(Request::only('keyword'))->onEachSide(5)->links() !!}
               </div>
 
             </div>
