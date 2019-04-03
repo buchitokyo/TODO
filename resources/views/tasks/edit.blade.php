@@ -32,12 +32,12 @@
 
               <div class="form-group">
                 <label for="title">内容</label>
-                <input type="text" class="form-control" name="content" id="content"
+                <input type="textarea" class="form-control" name="content" id="content"
                       value="{{ old('content', $task->content) }}" />
               </div>
 
               <div class="form-group">
-                <label for="status">状態</label>
+                <label for="status">進捗</label>
               <!-- 直前の入力値またはデータベースに登録済みの値を比べて、一致する場合に
                    option タグの中に 'selected' を出力 -->
                 <select name="status" id="status" class="form-control">
@@ -58,6 +58,24 @@
                 <label for="due_date">期限</label>
                 <input type="text" class="form-control" name="due_date" id="due_date"
                      value="{{ old('due_date', $task->formatted_due_date) }}" />
+              </div>
+
+              <div class="form-group">
+                <label for="status">担当者</label>
+              <!-- 直前の入力値またはデータベースに登録済みの値を比べて、一致する場合に
+                   option タグの中に 'selected' を出力 -->
+                <select name="status" id="status" class="form-control">
+                  <!-- STATUSのキー値（ 1,2,3 )を出力させている -->
+                  @foreach(\App\Task::STATUS as $key => $val)
+                    <option value="{{ $key }}"
+                        {{ $key == old('status', $task->status) ? 'selected' : '' }}>
+
+                    <!-- STATUS['label']の値が出力 -->
+                      {{ $val['label'] }}
+
+                    </option>
+                  @endforeach
+                </select>
               </div>
 
               <div class="text-right">

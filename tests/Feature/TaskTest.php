@@ -32,6 +32,7 @@ class TaskTest extends TestCase
     {
         $response = $this->post('/folders/1/tasks/create', [
             'title' => 'Sample task',
+            'content' => 'Sample content',
             'due_date' => 123, // 不正なデータ（数値）
         ]);
 
@@ -48,6 +49,7 @@ class TaskTest extends TestCase
     {
         $response = $this->post('/folders/1/tasks/create', [
             'title' => 'Sample task',
+            'content' => 'Sample content',
             'due_date' => Carbon::yesterday()->format('Y/m/d'), // 不正なデータ（昨日の日付）
         ]);
 
@@ -66,12 +68,13 @@ class TaskTest extends TestCase
 
         $response = $this->post('/folders/1/tasks/1/edit', [
             'title' => 'Sample task',
+            'content' => 'Sample content',
             'due_date' => Carbon::today()->format('Y/m/d'),
             'status' => 999,
         ]);
 
         $response->assertSessionHasErrors([
-            'status' => '状態 には未着手、着手中、完了 のいずれかを指定して下さい。',
+            'status' => '進捗 には未着手、着手中、完了 のいずれかを指定して下さい。',
         ]);
       }
 }

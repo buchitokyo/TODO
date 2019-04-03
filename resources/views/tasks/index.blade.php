@@ -3,7 +3,7 @@
 @section('content')
       <div class="container">
         <div class="row">
-          <div class="col col-md-4">
+          <div class="col col-md-3">
             <nav class="panel panel-default">
               <div class="panel-heading">
                 フォルダ
@@ -32,7 +32,7 @@
             </div>
           </div>
 
-          <div class="column col-md-8">
+          <div class="column col-md-9">
             <div class="panel panel-default">
               <div class="panel-heading">タスク</div>
                 <div class="panel-body">
@@ -44,17 +44,16 @@
                   </div>
                 </div>
               <table class="table">
-
-                  このページのタスク{{ count($tasks) }}件の内、{{ count($tasks->where('status',3 )) }}件完了
-
+                　このページのタスク{{ count($tasks) }}/{{ count($tasks->where('status',3 )) }}件　完了
                 <thead>
                 <tr>
-                  <th>タイトル</th>
-                  <th width="230" height="47">内容</th>
-                  <th>状態</th>
-                  <th>期限</th>
-                  <th width="74" height="47"></th>
-                  <th width="74" height="47"></th>
+                  <th class="column col-md-3">タイトル</th>
+                  <th class="column col-md-3" height="47">内容</th>
+                  <th class="column col-md-1">進捗</th>
+                  <th class="column col-md-1">期限</th>
+                  <th class="column col-md-1">担当者</th>
+                  <th class="column col-md-1" height="47"></th>
+                  <th class="column col-md-1" height="47"></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -65,6 +64,7 @@
                     <!-- status_labelはアクセサメゾットをTask modelで定義 -->
                     <td><span class="label {{ $task -> status_class }}">{{ $task->status_label }}</span></td>
                     <td>{{ $task -> formatted_due_date }}</td>
+                    <td><span class="label">{{ $task->status_label }}</span></td>
                     <td class="edit"><a href="{{ route('tasks.edit', ['id' => $task->folder_id, 'task_id' => $task->id]) }}"
                       class="btn btn-success btn-sm glyphicon glyphicon-pencil">編集</td>
                     <td class="delete"><form action="{{ route('tasks.delete', ['id' => $task->folder_id, 'task_id' => $task->id]) }}" method="POST">

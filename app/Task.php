@@ -11,9 +11,11 @@ class Task extends Model
    * 状態定義
    */
    const STATUS = [
-     1 => ['label' => '未着手','class' => 'label-danger'],
-     2 => ['label' => '着手中','class' => 'label-info'],
-     3 => ['label' => '完了','class' => ''],
+     1 => ['label' => '未対応','class' => 'label-danger'],
+     2 => ['label' => '対応中','class' => 'label-success'],
+     3 => ['label' => '保留','class' => 'label-primary'],
+     4 => ['label' => '確認中','class' => 'label-warning'],
+     5 => ['label' => '完了','class' => ''],
    ];
 
    /**

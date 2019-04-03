@@ -37,11 +37,11 @@
 
                 <div class="form-group">
                   <label for="content">コンテント</label>
-                  <input type="text" class="form-control" name="content" id="content" placeholder="内容を入力して下さい。" value="{{ old('content') }}">
+                  <input type="textarea" class="form-control" name="content" id="content" placeholder="内容を入力して下さい。" value="{{ old('content') }}">
                 </div>
 
                 <div class="form-group">
-                  <label for="due_date">期限</label>
+                  <label for="due_date">進捗</label>
                   <input type="text" class="form-control" name="due_date" id="due_date" placeholder="期限を入力して下さい。" value="{{ old('due_date') }}">
                 </div>
 

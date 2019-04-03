@@ -8,18 +8,23 @@
             <div class="panel panel-default">
               <div class="panel-heading">タスクの詳細</div>
               <table class="table">
-                    <tr>
-                      <th width="30" height="47">タイトル</th><td width="554" height="47">{{ $task->title }}</a></td>
-                    </tr>
-                    <tr>
-                      <th width="30" height="47">内容</th width="554" height="47"><td>{{ $task->content }}</td>
-                    </tr>
-                    <tr>
-                      <th width="30" height="47">状態</th><td width="554" height="47"><span class="label {{ $task -> status_class }}">{{ $task->status_label }}</span></td>
-                    </tr>
-                    <tr>
-                      <th width="30" height="47">期限</th><td width="554" height="47">{{ $task -> formatted_due_date }}</td>
-                    </tr>
+                <tbody>
+                  <tr>
+                    <th width="30" height="47">タイトル</th><td height="47">{{ $task->title }}</a></td>
+                  </tr>
+                  <tr>
+                    <th width="30" height="47">内容</th><td height="47" style="word-break:break-all;">{{ $task->content }}</td>
+                  </tr>
+                  <tr>
+                    <th width="30" height="47">進捗</th><td height="47"><span class="label {{ $task -> status_class }}">{{ $task->status_label }}</span></td>
+                  </tr>
+                  <tr>
+                    <th width="30" height="47">期限</th><td height="47">{{ $task -> formatted_due_date }}</td>
+                  </tr>
+                  <tr>
+                    <th width="30" height="47">担当者</th><td height="47"><span class="label {{ $task -> status_class }}">{{ $task->status_label }}</span></td>
+                  </tr>
+                </tbody>
               </table>
             </div>
 

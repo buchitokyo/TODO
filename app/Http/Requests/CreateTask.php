@@ -26,6 +26,7 @@ class CreateTask extends FormRequest
     {
         return [
             'title' => 'required|max:100',
+            'title' => 'required|max:100',
             'due_date' => 'required|date|after_or_equal:today',
          //after_or_equal after_or_equal（特定の日付と同じまたはそれ以降の日付であること）を使用
          //引数として today を指定することにより今日を含んだ未来日だけを許容
@@ -35,6 +36,7 @@ class CreateTask extends FormRequest
     public function attributes(){
         return [
             'title' => 'タイトル',
+            'content' => '内容',
             'due_date' => '期限日',
       ];
     }

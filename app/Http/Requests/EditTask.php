@@ -25,7 +25,7 @@ class EditTask extends CreateTask    //EditTask クラスは CreateTask クラ�
       $attributes = parent::attributes();
 
       return $attributes + [
-        'status' => '状態',
+        'status' => '進捗',
       ];
     }
 
