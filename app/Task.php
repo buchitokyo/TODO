@@ -12,9 +12,9 @@ class Task extends Model
    */
    const STATUS = [
      1 => ['label' => '未対応','class' => 'label-danger'],
-     2 => ['label' => '対応中','class' => 'label-success'],
-     3 => ['label' => '保留','class' => 'label-primary'],
-     4 => ['label' => '確認中','class' => 'label-warning'],
+     2 => ['label' => '対応中','class' => 'label-warning'],
+     3 => ['label' => '保留','class' => 'label-info'],
+     4 => ['label' => '確認中','class' => 'label-primary'],
      5 => ['label' => '完了','class' => ''],
    ];
 
@@ -62,5 +62,9 @@ class Task extends Model
     {
         return Carbon::createFromFormat('Y-m-d', $this->attributes['due_date'])
             ->format('Y/m/d');
+    }
+
+    public function getStaffNameAttribute() {
+      return config('staff.'.$this->staff_id);
     }
 }

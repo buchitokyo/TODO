@@ -22,7 +22,7 @@
                     <th width="30" height="47">期限</th><td height="47">{{ $task -> formatted_due_date }}</td>
                   </tr>
                   <tr>
-                    <th width="30" height="47">担当者</th><td height="47"><span class="label {{ $task -> status_class }}">{{ $task->status_label }}</span></td>
+                    <th width="30" height="47">担当者</th><td height="47">{{ $task->staff_name }}</td>
                   </tr>
                 </tbody>
               </table>

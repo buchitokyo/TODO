@@ -41,8 +41,17 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="due_date">進捗</label>
+                  <label for="due_date">期限日</label>
                   <input type="text" class="form-control" name="due_date" id="due_date" placeholder="期限を入力して下さい。" value="{{ old('due_date') }}">
+                </div>
+
+                <div class="form-group">
+                  <label for="staff">担当者を選択してください。</label></label>
+                  <select name="staff_id" id = "staff" class="form-control">
+                    @foreach ($staffs as $key => $value)
+                      <option value="{{ $key }}" @if( old('staff_id') == $key ) selected @endif>{{ $value }}</option>
+                    @endforeach
+                  </select>
                 </div>
 
                 <div class="text-right">

@@ -45,10 +45,8 @@
                   @foreach(\App\Task::STATUS as $key => $val)
                     <option value="{{ $key }}"
                         {{ $key == old('status', $task->status) ? 'selected' : '' }}>
-
                     <!-- STATUS['label']の値が出力 -->
                       {{ $val['label'] }}
-
                     </option>
                   @endforeach
                 </select>
@@ -61,20 +59,14 @@
               </div>
 
               <div class="form-group">
-                <label for="status">担当者</label>
-              <!-- 直前の入力値またはデータベースに登録済みの値を比べて、一致する場合に
-                   option タグの中に 'selected' を出力 -->
-                <select name="status" id="status" class="form-control">
-                  <!-- STATUSのキー値（ 1,2,3 )を出力させている -->
-                  @foreach(\App\Task::STATUS as $key => $val)
-                    <option value="{{ $key }}"
-                        {{ $key == old('status', $task->status) ? 'selected' : '' }}>
-
-                    <!-- STATUS['label']の値が出力 -->
-                      {{ $val['label'] }}
-
-                    </option>
-                  @endforeach
+                <label for="staff">担当者</label>
+                  <select name="staff_id" id="staff" class="form-control">
+                    @foreach ($staffs as $key => $value)
+                      <option value="{{ $key }}"
+                        {{ $key == old('staff_id', $task->staff_id ) ? 'selected' : '' }}>{{ $value }}</option>
+                    @endforeach
+                  </select>
+                </div>
                 </select>
               </div>
 
