@@ -44,7 +44,7 @@
                   </div>
                 </div>
               <table class="table">
-                　このページのタスク{{ count($tasks) }}/{{ count($tasks->where('status',3 )) }}件　完了
+                　このページのタスク {{ count($tasks->where('status',5 )) }}/{{ count($tasks) }} 件　完了
                 <thead>
                 <tr>
                   <th class="column col-md-3">タイトル</th>
