@@ -14,6 +14,10 @@
   <nav class="my-navbar">
     <p><a class="my-navbar-brand" href="/"></a></p>
     <div class="my-navbar-control">
+          <!-- <form class="form-inline" action="/task" method="GET">
+            <input type="text" name="q" value="" class="form-control" placeholder="入力してください">
+            <input type="submit" value="検索" class="btn btn-info">
+          </form> -->
       @if(Auth::check())
         <span class="my-navbar-item">ようこそ, {{ Auth::user()->name }}さん</span>
         ｜

@@ -15,34 +15,6 @@ class TaskController extends Controller
   // パラメーターの利用
   public function index(Folder $folder){  //int $id
 
-     //  // すべてのフォルダを取得する
-     //  //$folders = Folder::all();
-     //
-     //  // ユーザーのフォルダを取得する
-     //  $folders = Auth::user()->folders()->get();
-     //
-     //  // 選ばれたフォルダを取得する
-     //  $current_folder = Folder::find($id);
-     //
-     //  if(is_null($current_folder)){
-     //    abort(404);
-     //  }
-     //
-     //  // 選ばれたフォルダに紐づくタスクを取得する model classを使用
-     //  // $tasks = Tasks::where('folder_id', $current_folder->id)->get(); だとエラー
-     //  // $tasks = Task::where('folder_id', $current_folder->id)->get();
-     //  //    ↓
-     //  // Folder ModelでhasManyを定義したためtasks()が使える -> はrailsの . と一緒
-     //  $tasks = $current_folder->tasks()->get();
-     //
-     // //第一引数がテンプレートファイル名で第二引数がテンプレートに渡すデータ
-     // //あくまでテンプレート側ではキー名が変数名（任意）で参照できる   プロパティのように参照
-     //  return view('tasks.index', [
-     //      'folders' => $folders,
-     //      'current_folder_id' => $current_folder->id,  //  'id' => $current_folder_id  //view側
-     //      'tasks' => $tasks,
-     //  ]);
-
      // ユーザーのフォルダを取得する
       $folders = Auth::user()->folders()->orderBy('created_at', 'asc')->get();
 
@@ -71,9 +43,10 @@ class TaskController extends Controller
 
     public function showCreateForm (Folder $folder)
     {
+      $staffs = config('staff');
       return view('tasks/create', [
             'folder_id' => $folder->id,
-        ]);
+        ])->with(['staffs' => $staffs]);
     }
 
     /**
@@ -92,6 +65,7 @@ class TaskController extends Controller
       $task->title = $request->title;
       $task->content = $request->content;
       $task->due_date = $request->due_date;
+      $task->staff_id = $request->staff_id;
 
       // インスタンスの状態をデータベースに書き込む
       $folder->tasks()->save($task);
@@ -109,13 +83,14 @@ class TaskController extends Controller
      * @return \Illuminate\View\View
      */
     public function showEditForm(Folder $folder,Task $task){
+      $staffs = config('staff');
       $this->checkRelation($folder, $task);
 
       //$task = Task::find($task);
 
       return view('tasks/edit',[
         'task' => $task,
-      ]);
+      ])->with(['staffs' => $staffs]);
 
     }
 
@@ -138,6 +113,7 @@ class TaskController extends Controller
       $task->content = $request ->content;
       $task->status = $request ->status;
       $task->due_date = $request->due_date;
+      $task->staff_id = $request->staff_id;
       $task->save();
 
       //3 編集対象のタスクが属するタスク一覧画面へリダイレクト
@@ -175,7 +151,6 @@ class TaskController extends Controller
         }
     }
 
-
     /**
       * タスク
       * @param Folder $folder
@@ -186,12 +161,12 @@ class TaskController extends Controller
     //まずリクエストされた ID でタスクデータを取得。これが編集対象
     public function list ( Folder $folder,Task $task) {
       //$task = Task::find($task);
-
+      $staffs = config('staff');
       $this->checkRelation($folder, $task);
 
        return view('tasks.list', [
           'task' => $task,
-       ]);
+       ])->with(['staffs' => $staffs]);
     }
 
 }
