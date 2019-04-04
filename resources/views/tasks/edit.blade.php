@@ -70,7 +70,7 @@
                 </select>
               </div>
 
-              <div class="text-right">
+              <div class="text-right" style="padding: 20px;">
                 <button type="submit" class="btn btn-primary">送信</button>
                 <input value="戻る" onclick="history.back();" type="button" class="btn btn-default">
               </div>

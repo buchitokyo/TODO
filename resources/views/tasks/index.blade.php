@@ -47,20 +47,20 @@
                 　このページのタスク {{ count($tasks->where('status',5 )) }}/{{ count($tasks) }} 件　完了
                 <thead>
                 <tr>
-                  <th class="column col-md-3">タイトル</th>
-                  <th class="column col-md-3" height="47">内容</th>
-                  <th class="column col-md-1">進捗</th>
-                  <th class="column col-md-1">期限</th>
-                  <th class="column col-md-1">担当者</th>
-                  <th class="column col-md-1" height="47"></th>
-                  <th class="column col-md-1" height="47"></th>
+                  <th class="column col-md-2" style= 'background-color: #e6e9ed;'>タイトル</th>
+                  <th class="column col-md-4" height="47" style= 'background-color: #e6e9ed;'>内容</th>
+                  <th class="column col-md-1" style= 'background-color: #e6e9ed;'>進捗</th>
+                  <th class="column col-md-1" style= 'background-color: #e6e9ed;'>期限</th>
+                  <th class="column col-md-1" style= 'background-color: #e6e9ed;'>担当者</th>
+                  <th class="column col-md-1" height="47" style= 'background-color: #e6e9ed;'></th>
+                  <th class="column col-md-1" height="47" style= 'background-color: #e6e9ed;'></th>
                 </tr>
                 </thead>
                 <tbody>
                   @foreach ($tasks as $task)
                   <tr>
                     <td><a href="{{ route('tasks.list', ['id' => $task->folder_id, 'task_id' => $task->id]) }}">{{ $task->title }}</a></td>
-                    <td>{{ mb_substr($task->content,0,15)."..." }}</td>
+                    <td>{{ mb_substr($task->content,0,30)."..." }}</td>
                     <!-- status_labelはアクセサメゾットをTask modelで定義 -->
                     <td><span class="label {{ $task -> status_class }}">{{ $task->status_label }}</span></td>
                     <td>{{ $task -> formatted_due_date }}</td>
