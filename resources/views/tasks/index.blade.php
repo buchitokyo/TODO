@@ -65,12 +65,16 @@
                     <td><span class="label {{ $task -> status_class }}">{{ $task->status_label }}</span></td>
                     <td>{{ $task -> formatted_due_date }}</td>
                     <td>{{ $task -> staff_name }}</td>
+                    @auth
+                    @if( ($folder->id)=== $task->folder_id)
                     <td class="edit"><a href="{{ route('tasks.edit', ['id' => $task->folder_id, 'task_id' => $task->id]) }}"
                       class="btn btn-success btn-sm glyphicon glyphicon-pencil">編集</td>
                     <td class="delete"><form action="{{ route('tasks.delete', ['id' => $task->folder_id, 'task_id' => $task->id]) }}" method="POST">
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
                         <button type="submit" class="btn btn-danger btn-sm glyphicon glyphicon-trash" id="delete">削除</button>
+                    @endif
+                    @endauth
                     </td>
                   </tr>
                   @endforeach

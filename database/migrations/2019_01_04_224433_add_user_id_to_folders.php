@@ -18,6 +18,7 @@ class AddUserIdToFolders extends Migration
 
             // 外部キーを設定する
             $table->foreign('user_id')->references('id')->on('users');
+            // ->onDelete('cascade');  //ユーザーが削除されたら紐付くpostsも削除;
         });
     }
 

@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\Auth;  //追加
 
 class TaskController extends Controller
 {
+  /**
+   * タスク一覧
+   * @param Folder $folder
+   * @return \Illuminate\View\View
+   */
   // パラメーターの利用
   public function index(Folder $folder){  //int $id
 

@@ -19,7 +19,9 @@
             <input type="submit" value="検索" class="btn btn-info">
           </form> -->
       @if(Auth::check())
-        <span class="my-navbar-item">ようこそ, {{ Auth::user()->name }}さん</span>
+        <a class="my-navbar-item" href="{{ route('users.index') }}">ユーザー一覧</a>
+        ｜
+          <span class="my-navbar-item">ようこそ, {{ Auth::user()->name }}さん</span>
         ｜
         <a href="#" id="logout" class="my-navbar-item">ログアウト</a>
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
