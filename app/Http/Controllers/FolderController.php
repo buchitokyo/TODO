@@ -21,12 +21,9 @@ class FolderController extends Controller
 
     // タイトルに入力値を代入する p.66
     $folder->title = $request->title;
-
-    // インスタンスの状態をデータベースに書き込む
-    //$folder->save();
-
+    
     // ユーザーに紐づけて保存
-      Auth::user()->folders()->save($folder);
+    Auth::user()->folders()->save($folder);
 
     return redirect()->route('tasks.index',[
       'id'=>$folder->id,

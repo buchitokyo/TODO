@@ -8,15 +8,16 @@
         <div class="text-left">
           <table class="table">
             <thead>
-                <tr>
-                    <th>ユーザー名</th>
-                </tr>
+              <tr>
+                  <th>ユーザー名</th>
+                  <th>リンク</th>
+              </tr>
             </thead>
             <tbody>
-                @foreach ($users as $user)
-                    <tr>
-                        <td><a href="">{{ $user->name }}</a></td>
-                    </tr>
+              @foreach ($users as $user)
+                <tr>
+                  <td><a href="{{ route('tasks.index',['id' => $folder->id]) }}"{{ $user->name }}</a></td>
+                </tr>
               @endforeach
             </tbody>
         </table>

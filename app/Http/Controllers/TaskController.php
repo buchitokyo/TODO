@@ -18,8 +18,8 @@ class TaskController extends Controller
    * @return \Illuminate\View\View
    */
   // パラメーターの利用
-  public function index(Folder $folder){  //int $id
-
+  public function index(Folder $folder)
+  {  //int $id
      // ユーザーのフォルダを取得する
       $folders = Auth::user()->folders()->orderBy('created_at', 'asc')->get();
 
@@ -32,7 +32,7 @@ class TaskController extends Controller
           'current_folder_id' => $folder->id,
           'tasks' => $tasks,
       ]);     //compact('tasks') pagenation
-    }
+  }
 
   //   public static function getMyCount() {
 	// 	// ここに何かの処理

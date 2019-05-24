@@ -37,7 +37,7 @@
 
                 <div class="form-group">
                   <label for="content">コンテント</label>
-                  <input type="textarea" class="form-control" name="content" id="content" placeholder="内容を入力して下さい。" value="{{ old('content') }}">
+                  <textarea rows="10" cols="30" class="form-control" name="content" id="content" placeholder="内容を入力して下さい。" value="{{ old('content') }}"></textarea>
                 </div>
 
                 <div class="form-group">

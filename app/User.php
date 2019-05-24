@@ -17,6 +17,11 @@ class User extends Authenticatable
       return $this->hasMany('App\Folder');
     }
 
+    public function tasks() {
+      //hasManyの関係   folder Modelに関して
+      return $this->hasMany('App\Task');
+    }
+
     /**
      * The attributes that are mass assignable.
      *
